@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+
+<title>PDF Toolkit Pro</title>
+
+<link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+  <h1>PDF Toolkit Pro</h1>
+
+  <div class="tabs">
+    <button id="tabMerge" class="tab" onclick="switchTab('merge')">Merge</button>
+    <button id="tabCompress" class="tab active" onclick="switchTab('compress')">Compress</button>
+  </div>
+
+  <div id="compressTab" class="tabContent">
+    <div class="drop">
+      <input type="file" id="pdfFile">
+      <p>Drag & Drop PDF here</p>
+    </div>
+
+    <input type="number" id="size" placeholder="Target size KB" min="1" required>
+    <button onclick="compress()">Compress</button>
+
+    <div id="result"></div>
+  </div>
+
+  <div id="mergeTab" class="tabContent" style="display:none;">
+    <div class="drop">
+      <input type="file" id="mergeFiles" multiple accept="application/pdf">
+      <p>Drag & drop PDF files here (or click to select)</p>
+    </div>
+
+    <div id="mergeCards" class="cards"></div>
+
+    <button onclick="merge()">Merge</button>
+    <div id="mergeResult"></div>
+  </div>
+
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
