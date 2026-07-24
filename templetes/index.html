@@ -2,51 +2,230 @@
 <html>
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PDF Toolkit Pro</title>
-
-<link rel="stylesheet" href="/static/style.css">
-
+  <title>PDF Toolkit Pro</title>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
 
-<div class="app">
+  <div class="layout">
 
-  <h1>PDF Toolkit Pro</h1>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-  <div class="tabs">
-    <button id="tabMerge" class="tab" onclick="switchTab('merge')">Merge</button>
-    <button id="tabCompress" class="tab active" onclick="switchTab('compress')">Compress</button>
+      <div class="logo">
+        <h2>PDF Toolkit</h2>
+      </div>
+
+      <nav class="menu">
+
+        <button id="tabMerge" class="menu-btn active" onclick="switchTab('merge')">
+          Merge PDF
+        </button>
+
+        <button id="tabCompress" class="menu-btn" onclick="switchTab('compress')">
+          Compress PDF
+        </button>
+
+        <button class="menu-btn feedback-btn" onclick="openFeedback()">
+          Feedback
+        </button>
+        <p>or write to email</p>
+      </nav>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- HEADER -->
+      <header class="topbar">
+
+        <div class="topbar-content">
+
+          <div class="brand">
+            <img src="/static/images/ntpc-logo.png" alt="NTPC Logo">
+            <h1>NTPC DADRI</h1>
+          </div>
+
+          <h1>Merge &amp; Compress PDF</h1>
+
+        </div>
+
+      </header>
+
+      <!-- ========================================= -->
+      <!-- MERGE -->
+      <!-- ========================================= -->
+
+      <section id="mergeTab" class="workspace">
+
+        <div class="card">
+
+          <div class="card-header">
+            Merge PDF Files
+          </div>
+          <div class="upload-section"> <label class="dropzone">
+              <input type="file" id="mergeFiles" multiple accept=".pdf">
+              <div> <span class="upload-icon">📄</span>
+                <span>Select Multiple PDFs</span>
+              </div>
+            </label> </div>
+
+          <div class="content-row">
+
+            <!-- PREVIEW -->
+            <div class="preview-panel">
+
+              <div class="panel-title">
+                PDF Preview
+              </div>
+
+              <div id="mergePreview" class="pdf-preview">No PDF Selected
+
+
+
+              </div>
+
+            </div>
+
+            <!-- FILE LIST -->
+            <div class="details-panel">
+
+              <div class="panel-title">
+                Change the order of the files by selecting and dragging them up or down.
+              </div>
+
+              <div id="mergeCards" class="cards">
+
+              </div>
+
+              <button class="primary-btn" onclick="merge()">
+
+                Merge PDF Files
+
+              </button>
+
+              <div id="mergeResult" class="result-card">
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ========================================= -->
+      <!-- COMPRESS -->
+      <!-- ========================================= -->
+
+      <section id="compressTab" class="workspace" style="display:none">
+
+        <div class="card">
+
+          <div class="card-header">
+            PDF Compression
+          </div>
+
+          <div class="upload-section"> <label class="dropzone"> <input type="file" id="pdfFile" accept=".pdf">
+              <div> <span class="upload-icon">📄</span> <span>Select PDF</span> </div>
+            </label> </div>
+
+          <div class="content-row">
+
+            <!-- PREVIEW -->
+            <div class="preview-panel">
+
+              <div class="panel-title">
+                Preview
+              </div>
+
+              <div id="compressPreview" class="pdf-preview">
+
+                No PDF Selected
+
+              </div>
+
+            </div>
+
+            <!-- DETAILS -->
+            <div class="details-panel">
+
+              <div class="panel-title">
+                Compression
+              </div>
+
+              <div class="field">
+
+                <label>Original PDF Size</label>
+                <input type="text" id="originalSize" readonly>
+
+              </div>
+
+              <div class="field">
+
+                <label>Target Size (MB)</label>
+                <input type="number" id="size" min="0.1" step="0.1">
+
+              </div>
+
+              <button class="primary-btn" onclick="compress()">
+
+                Compress PDF
+
+              </button>
+
+              <div id="result" class="result-card">
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- Feedback Modal -->
+      <div id="feedbackModal" class="modal">
+
+        <div class="modal-content">
+
+          <h2>Feedback</h2>
+
+          <textarea id="feedbackText" placeholder="Write your feedback here..."></textarea>
+
+          <div class="modal-buttons">
+
+            <button class="primary-btn" onclick="sendFeedback()">
+              Send
+            </button>
+
+            <button class="secondary-btn" onclick="closeFeedback()">
+              Cancel
+            </button>
+
+
+          </div>
+          <div id="feedbackMessage" style="margin-top:15px;text-align:center;"></div>
+
+        </div>
+
+      </div>
+
+    </main>
+
   </div>
 
-  <div id="compressTab" class="tabContent">
-    <div class="drop">
-      <input type="file" id="pdfFile">
-      <p>Drag & Drop PDF here</p>
-    </div>
-
-    <input type="number" id="size" placeholder="Target size KB" min="1" required>
-    <button onclick="compress()">Compress</button>
-
-    <div id="result"></div>
-  </div>
-
-  <div id="mergeTab" class="tabContent" style="display:none;">
-    <div class="drop">
-      <input type="file" id="mergeFiles" multiple accept="application/pdf">
-      <p>Drag & drop PDF files here (or click to select)</p>
-    </div>
-
-    <div id="mergeCards" class="cards"></div>
-
-    <button onclick="merge()">Merge</button>
-    <div id="mergeResult"></div>
-  </div>
-
-</div>
-
-<script src="/static/script.js"></script>
+  <script src="/static/script.js"></script>
 
 </body>
+
 </html>
