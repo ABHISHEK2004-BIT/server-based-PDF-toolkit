@@ -1,138 +1,567 @@
-body{
+/* =====================================================
+   GLOBAL
+===================================================== */
 
-font-family:Segoe UI;
-
-background:linear-gradient(135deg,#4facfe,#00f2fe);
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-height:100vh;
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Segoe UI, Tahoma, sans-serif;
 }
 
-.app{
-
-background:white;
-
-padding:40px;
-
-border-radius:10px;
-
-width:400px;
-
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
-
-text-align:center;
-
+html,
+body {
+  height: 100%;
+  background: #f4f7fa;
+  color: #1e293b;
 }
 
-.drop{
-
-border:2px dashed #4facfe;
-
-padding:25px;
-
-margin-bottom:15px;
-
-border-radius:10px;
-
+body {
+  overflow: hidden;
 }
 
-button{
+/* =====================================================
+   LAYOUT
+===================================================== */
 
-background:#4facfe;
-
-border:none;
-
-padding:10px 20px;
-
-color:white;
-
-border-radius:6px;
-
-cursor:pointer;
-
+.layout {
+  display: flex;
+  height: 100vh;
 }
 
-button:hover{
+/* =====================================================
+   SIDEBAR
+===================================================== */
 
-background:#007bff;
-
+.sidebar {
+  width: 240px;
+  background: #0f172a;
+  color: white;
+  display: flex;
+  flex-direction: column;
 }
 
-#result{
-
-margin-top:20px;
-
+.logo {
+  padding: 30px 20px;
+  border-bottom: 1px solid #334155;
 }
 
-.tabs{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin-bottom:20px;
+.logo h2 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
 }
 
-.tab{
-  background:#f1f1f1;
-  border:none;
-  color:#333;
-  padding:10px 18px;
-  border-radius:8px;
-  cursor:pointer;
-  flex:1;
+.logo p {
+  color: #94a3b8;
+  font-size: .85rem;
 }
 
-.tab.active{
-  background:#4facfe;
-  color:#fff;
+.menu {
+  padding: 20px 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.tabContent{
-  text-align:left;
+.feedback-btn {
+
+  margin-top: auto;
+
+  width: 100%;
+
+  padding: 15px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #16a34a !important;
+
+  color: white !important;
+
+  cursor: pointer;
+
+  font-size: 1rem;
+
+  text-align: left;
+
+  transition: .2s;
 }
 
-.cards{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  justify-content:center;
-  margin:15px 0;
+.feedback-btn:hover {
+
+  background: #15803d !important;
 }
 
-.card{
-  border:1px solid #ddd;
-  border-radius:10px;
-  padding:10px;
-  width:160px;
-  background:#fafafa;
-  cursor:grab;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
+.menu-btn {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #cbd5e1;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: left;
+  transition: .2s;
 }
 
-.card.dragging{
-  opacity:0.6;
-  border-color:#4facfe;
+.menu-btn:hover {
+  background: #1e293b;
 }
 
-.card.drag-over{
-  border-color:#007bff;
-  box-shadow:0 0 0 2px rgba(0, 123, 255, 0.25);
+.menu-btn.active {
+  background: #2563eb;
+  color: white;
 }
 
-.card button{
-  margin-top:10px;
-  background:#ff4d4d;
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-#mergeResult{
+/* =====================================================
+   HEADER
+===================================================== */
 
-margin-top:20px;
+.topbar {
+  background: white;
+  padding: 16px 30px;
+  border-bottom: 1px solid #dbe2ea;
+}
 
+.topbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.brand span {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #003366;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+/* =====================================================
+   WORKSPACE
+===================================================== */
+
+.workspace {
+  padding: 20px;
+  overflow: auto;
+  flex: 1;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #dbe2ea;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, .05);
+}
+
+.card-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* =====================================================
+   UPLOAD
+===================================================== */
+
+.upload-section {
+  padding: 15px 20px;
+}
+
+.dropzone {
+  display: inline-block;
+}
+
+.dropzone input {
+  display: none;
+}
+
+.dropzone div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 260px;
+  /* Increase width */
+  height: 55px;
+
+  background: #2563eb;
+  color: white;
+
+  border-radius: 8px;
+  cursor: pointer;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  transition: .2s;
+
+  white-space: nowrap;
+  /* Prevent text from wrapping */
+}
+
+.dropzone div:hover {
+  background: #1d4ed8;
+}
+
+.upload-icon {
+  display: block;
+  font-size: 22px;
+  margin: 0;
+}
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content-row {
+  display: flex;
+  gap: 20px;
+  padding: 0 25px 25px;
+}
+
+/* =====================================================
+   PREVIEW
+===================================================== */
+
+.preview-panel {
+  flex: 1.5;
+  min-width: 0;
+}
+
+.details-panel {
+  flex: 1;
+  min-width: 350px;
+}
+
+.panel-title {
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 1.05rem;
+}
+
+.pdf-preview {
+  height: 750px;
+  background: white;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.field {
+  margin-bottom: 20px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.field input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.primary-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: .2s;
+}
+
+.primary-btn:hover {
+  background: #1d4ed8;
+}
+
+/* =====================================================
+   RESULT
+===================================================== */
+
+.result-card {
+  background: #f8fafc;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  padding: 20px;
+  min-height: 150px;
+}
+
+.result-card h3 {
+  margin-bottom: 15px;
+  color: #15803d;
+}
+
+.result-card p {
+  margin-bottom: 10px;
+}
+
+.result-card a {
+  display: inline-block;
+  padding: 10px 18px;
+  background: #15803d;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+/* =====================================================
+   MERGE CARDS
+===================================================== */
+
+.cards {
+  border: 1px solid #dbe2ea;
+  border-radius: 10px;
+  min-height: 300px;
+  max-height: 500px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  background: #f8fafc;
+  padding: 8px;
+}
+
+.cards .card {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 14px 16px;
+  margin: 8px 0;
+
+  cursor: pointer;
+
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+
+  background: white;
+
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.08);
+
+  transition:
+    background .2s,
+    border-color .2s,
+    transform .1s;
+}
+
+.cards .card:hover {
+
+  background: #eff6ff;
+
+  border-color: #2563eb;
+
+  transform: translateY(-1px);
+}
+
+.cards .card.active {
+
+  background: #dbeafe;
+
+  border-color: #2563eb;
+}
+
+.cards button {
+
+  border: none;
+
+  background: #dc2626;
+
+  color: white;
+
+  padding: 8px 14px;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  font-size: 0.9rem;
+
+  transition: .2s;
+}
+
+.cards button:hover {
+
+  background: #b91c1c;
+}
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e2e8f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 10px;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px) {
+
+  .content-row {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 180px;
+  }
+
+  .pdf-preview {
+    height: 500px;
+  }
+}
+
+/* ==========================================
+   FEEDBACK MODAL
+========================================== */
+
+.secondary-btn {
+
+  width: 100%;
+
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #64748b;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 1rem;
+}
+
+.secondary-btn:hover {
+
+  background: #475569;
+}
+
+.modal {
+
+  display: none;
+
+  position: fixed;
+
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, .45);
+
+  justify-content: center;
+
+  align-items: center;
+
+  z-index: 1000;
+}
+
+.modal-content {
+
+  width: 550px;
+
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 10px;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
+}
+
+.modal-content textarea {
+
+  width: 100%;
+
+  height: 180px;
+
+  padding: 10px;
+
+  margin-top: 15px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 8px;
+
+  resize: vertical;
+
+  font-size: 15px;
+}
+
+.modal-buttons {
+
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 20px;
 }
